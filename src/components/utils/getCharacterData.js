@@ -27,8 +27,6 @@ export default async function getCharacterData(character){
             }
         }
 
-        console.log(locationAndOrigin)
-
         return locationAndOrigin;
 
     }catch(err){

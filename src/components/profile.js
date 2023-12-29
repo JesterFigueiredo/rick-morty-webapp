@@ -68,7 +68,6 @@ export default function Profile({character,show,onHide,setShowProfile}){
     }
 
     else{
-        // console.log(locationAndOrigin?.origin?.name);
         return (
             <Popup
             trigger={<button className="button"> View Profile </button>}

@@ -1,22 +1,21 @@
 import React,{useState,useEffect} from "react";
 import Grid from "./grid";
 import axios from "axios";
-import Button from 'react-bootstrap/Button';
+import SearchBox from "./searchBox";
 import './componentStyles.css'
 
 
 export default function MainContainer(){
 
-    const [data, setData] = useState(null);
-    const [nextPrevious, setNextPrevious] = useState({previous:null,next:1,action:''});
     const [loading,setLoading] = useState(false);
+    const [charactersArray, setCharactersArray] = useState([]);
 
-    async function makeRequests(urls){
+    async function makeRequests(url){
         try {
-            const response = await axios.get(urls);
-            console.log(response.data); // Do something with the data
+            const response = await axios.get(url);
+            return response.data;
           } catch (error) {
-            console.error(`Error fetching data from ${urls}:`, error.message);
+            console.error(`Error fetching data from ${url}:`, error.message);
           }
     }
 
@@ -28,60 +27,29 @@ export default function MainContainer(){
             urls.push(`https://rickandmortyapi.com/api/character/?page=${i}`)
         }
         console.log(urls)
-    },[])
+        const requests = urls.map((url)=>makeRequests(url))
+        Promise.all(requests).then((data)=>{
+            const tempCharactersArray = [];
 
-    useEffect(()=>{
-        axios.get(`https://rickandmortyapi.com/api/character/?page=${nextPrevious['next']}`)
-        .then((response)=>{
-            setData(response.data.results)
-            setNextPrevious({...nextPrevious,
-                previous:response.data.info.prev,
-                next:response.data.info.next
-            })
+            for(let i of data){
+                for(let k of i.results){
+                    tempCharactersArray.push(k);
+                }
+            }
+
+            setCharactersArray(tempCharactersArray);
             setLoading(true);
-        }).catch((err)=>{
-            console.log(err)
         })
+         
     },[])
 
 
-    async function onClickPreviousNextButton(action){
-        if(!nextPrevious[action]){
-
-        }
-        else{
-            setLoading(false);
-            await axios.get(nextPrevious[action])
-            .then((response)=>{
-                setData(response.data.results)
-                setNextPrevious({...nextPrevious,
-                    previous:response.data.info.prev,
-                    next:response.data.info.next
-                })
-                setLoading(true);
-            }).catch((err)=>{
-                console.log(err)
-            })
-        }
-    }
-
-    if(loading){
-        return(
-            <div>
-                <div className="previous-next-buttons">
-                    <Button  variant="success" onClick={()=>{onClickPreviousNextButton('previous')}}>previous</Button>
-                    <Button  variant="success" onClick={()=>{onClickPreviousNextButton('next')}}>next</Button>
-                </div>
-                <Grid charactersData={data}/>
-            </div>
-        );
-    }
-
-    else{
-        return(
-            <div>
-                <h1>Loading.....</h1>
-            </div>
-        );
-    }
+    return ( loading ? 
+    <div>
+        <SearchBox charactersArray={charactersArray}/>
+        <Grid charactersData={charactersArray}/>
+    </div>
+     : 
+     <div><h1>Loading.....</h1></div>
+     )
 }
