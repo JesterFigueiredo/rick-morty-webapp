@@ -39,10 +39,10 @@ export default function Profile({character,buttonName}){
                 </button>
                 <div className="header">{character.name} </div>
                 <div className="content">
-                <div className="modal-image">
-                <img src={character.image} alt="Aw jeez, it didn't load" />
-                <h2>Loading....</h2>
-                </div>
+                  <div className="modal-image">
+                  <img src={character.image} alt="Aw jeez, it didn't load" />
+                  <h2>Loading....</h2>
+                  </div>
                 <br />
                 </div>
                 <div className="actions">
@@ -80,23 +80,23 @@ export default function Profile({character,buttonName}){
                 <img src={character.image} alt="Aw jeez, it didn't load" />
                 </div>
                 <h3>Character Information</h3>
-                <p><b>Name:</b> {character.name}</p>
-                <p><b>Gender:</b> {character.gender}</p>
-                <p><b>Species:</b> {character.species}</p>
-                <p><b>Type:</b> {character.type ? character.type : "--"}</p>
-                <p><b>Status:</b> {character.status}</p>
+                  <p><b>Name:</b> {character.name}</p>
+                  <p><b>Gender:</b> {character.gender}</p>
+                  <p><b>Species:</b> {character.species}</p>
+                  <p><b>Type:</b> {character.type ? character.type : "--"}</p>
+                  <p><b>Status:</b> {character.status}</p>
                 <br />
                 <h3>Origin</h3>
-                <p><b>Name:</b> {locationAndOrigin?.origin?.name ? locationAndOrigin['origin']['name'] : character.location?.name || "unknown"}</p>
-                <p><b>dimension:</b> {locationAndOrigin?.['origin']?.['dimension'] ? locationAndOrigin['origin']['dimension'] :"Unknown"}</p>
-                <p><b>Number of Known residents:</b> {locationAndOrigin?.['origin']?.['residents'] ? locationAndOrigin['origin']['residents'] :"Unknown"}</p>
-                <p><b>Type:</b> {locationAndOrigin?.['origin']?.['type'] ? locationAndOrigin['origin']['type'] :"Unknown"}</p>
+                  <p><b>Name:</b> {locationAndOrigin?.origin?.name ? locationAndOrigin['origin']['name'] : character.location?.name || "unknown"}</p>
+                  <p><b>dimension:</b> {locationAndOrigin?.['origin']?.['dimension'] ? locationAndOrigin['origin']['dimension'] :"Unknown"}</p>
+                  <p><b>Number of Known residents:</b> {locationAndOrigin?.['origin']?.['residents'] ? locationAndOrigin['origin']['residents'] :"Unknown"}</p>
+                  <p><b>Type:</b> {locationAndOrigin?.['origin']?.['type'] ? locationAndOrigin['origin']['type'] :"Unknown"}</p>
                 <br />
                 <h3>Current Location</h3>
-                <p><b>Name:</b> {locationAndOrigin?.['origin']?.['name'] ? locationAndOrigin['origin']['name'] :"Unknown"}</p>
-                <p><b>dimension:</b> {locationAndOrigin?.['origin']?.['dimension'] ? locationAndOrigin['origin']['dimension'] :"Unknown"}</p>
-                <p><b>Number of residents:</b> {locationAndOrigin?.['origin']?.['residents'] ? locationAndOrigin['origin']['residents'] :"Unknown"}</p>
-                <p><b>Type:</b> {locationAndOrigin?.['origin']?.['type'] ? locationAndOrigin['origin']['type'] :"Unknown"}</p>
+                  <p><b>Name:</b> {locationAndOrigin?.['origin']?.['name'] ? locationAndOrigin['origin']['name'] :"Unknown"}</p>
+                  <p><b>dimension:</b> {locationAndOrigin?.['origin']?.['dimension'] ? locationAndOrigin['origin']['dimension'] :"Unknown"}</p>
+                  <p><b>Number of residents:</b> {locationAndOrigin?.['origin']?.['residents'] ? locationAndOrigin['origin']['residents'] :"Unknown"}</p>
+                  <p><b>Type:</b> {locationAndOrigin?.['origin']?.['type'] ? locationAndOrigin['origin']['type'] :"Unknown"}</p>
                 <br />
                 <h3>Episodes they appeared In</h3>
                 {

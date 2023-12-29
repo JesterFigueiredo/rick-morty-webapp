@@ -26,7 +26,8 @@ export default function MainContainer(){
         const reqTimes = 42;
         const urls = [];
 
-        for(let i = 1; i<=42; i++){
+        for(let i = 1; i<=42; i++)
+        {
             urls.push(`https://rickandmortyapi.com/api/character/?page=${i}`)
         }
 
@@ -34,7 +35,8 @@ export default function MainContainer(){
         Promise.all(requests).then((data)=>{
             let tempCharactersArray = [];
 
-            for(let i of data){
+            for(let i of data)
+            {
                 for(let k of i.results){
                     tempCharactersArray.push(k);
                 }
@@ -51,7 +53,8 @@ export default function MainContainer(){
         
         if(filterOptions.episode && filterOptions.location==='' 
         && filterOptions.status==='' && filterOptions.gender==='' 
-        && filterOptions.species==='' && filterOptions.type===''){
+        && filterOptions.species==='' && filterOptions.type==='')
+        {
             
                 let filteredArray = initialArrayCopy.filter((characterObj)=>{
                     let flag = false;
@@ -71,9 +74,12 @@ export default function MainContainer(){
                 setCharactersArray(filteredArray);
         }
 
+
+
         else if(filterOptions.location && filterOptions.episode==='' 
-        && filterOptions.status==='' && filterOptions.gender==='' 
-        && filterOptions.species==='' && filterOptions.type===''){
+                && filterOptions.status==='' && filterOptions.gender==='' 
+                && filterOptions.species==='' && filterOptions.type==='')
+            {
                 let filteredArray = initialArrayCopy.filter((characterObj)=>{
                     let flag = false;
                     if(characterObj.location.name == filterOptions.location){
@@ -83,29 +89,32 @@ export default function MainContainer(){
                 })
                 console.log(filteredArray)
                 setCharactersArray(filteredArray);
-        }
+            }
 
-         else if(filterOptions){
+
+
+         else if(filterOptions)
+        {
             setLoading(false)
-            // console.log(filterOptions)
+
             const status = filterOptions.statustus ? encodeURIComponent(filterOptions.status) : "";
             const type = filterOptions.type ? encodeURIComponent(filterOptions.type) : "";
-            // const episode = encodeURIComponent(filterOptions.episode);
             const gender = filterOptions.gender ? encodeURIComponent(filterOptions.gender) : "";
             const species = filterOptions.species ? encodeURIComponent(filterOptions.species) : "";
             
             const url = `https://rickandmortyapi.com/api/character/?status=${status}&species=${species}&type=${type}&gender=${gender}`;
-            // console.log(url)
+
     
             axios.get(url).then((response)=>{
-                // console.log(response.data)
+
                 let tempCharactersArray = [];
 
                     for(let k of response.data.results){
                         tempCharactersArray.push(k);
                     }
 
-                if(filterOptions.episode){
+                if(filterOptions.episode)
+                {
                     let filteredArray = tempCharactersArray.filter((characterObj)=>{
                         let flag = false;
 
@@ -122,8 +131,10 @@ export default function MainContainer(){
 
                     tempCharactersArray = filteredArray;
                 }
+                
 
-                if(filterOptions.location){
+                if(filterOptions.location)
+                {
                         let filteredArray = tempCharactersArray.filter((characterObj)=>{
                             let flag = false;
                             if(characterObj.location.name == filterOptions.location){
@@ -137,7 +148,9 @@ export default function MainContainer(){
     
                 setCharactersArray(tempCharactersArray);
                 setLoading(true);
+
             }).catch((err)=>{
+                console.log(err);
                 setCharactersArray([])
             })
         }
@@ -151,7 +164,7 @@ export default function MainContainer(){
         <SearchDropDown charactersData={initialArrayCopy} setFilterOptions={setFilterOptions}/>
         <SearchBox charactersArray={initialArrayCopy}/>
         <Grid charactersData={charactersArray}/>
-        </div>
+    </div>
      : 
      <div><h1>Loading.....</h1></div>
      )

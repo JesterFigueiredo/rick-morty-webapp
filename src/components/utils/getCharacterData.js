@@ -6,7 +6,7 @@ export default async function getCharacterData(character){
 
         const originUrl = character.origin.url || null
         const locationUrl = character.location.url || null
-
+        
         let origin = originUrl ? (await axios.get(originUrl)).data : null;
         let location = locationUrl ? (await axios.get(locationUrl)).data : null;
 

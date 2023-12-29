@@ -1,26 +1,21 @@
 import Card from 'react-bootstrap/Card';
 import Profile from './profile';
-import { useState } from 'react';
 
 function CardComponent({character}) {
-  
-
-  const [showProfile, setShowProfile] = useState(false);
-
 
   return (
     <>
     <Card style={{ width: '18rem', border:'solid', overflow:'hidden'}}>
       <Card.Img variant="top" src={character.image}/>
-      <Card.Body style={{ padding:'10px'}}>
+        <Card.Body style={{ padding:'10px'}}>
         <Card.Title>{character.name}</Card.Title>
       </Card.Body>
     </Card>
-    <Profile 
-      character={character}
-    />
+
+    <Profile character={character}/>
     </>
   );
+  
 }
 
 export default CardComponent;
