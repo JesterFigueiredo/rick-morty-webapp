@@ -1,0 +1,13 @@
+make it infinite scrolling
+
+grid of cards(resuable card component)
+-each card is clickable, displaying an individual profile of the character(resuable profile component)
+-profile will contain: Character's picture,Character's information (name, species, gender, etc.), Origin and current location details (name, dimension, amount of residents, etc.)[Important], Name of the Episodes the character is featured in [Important]
+Optional -> 
+Page to display Locations in a grid of cards 
+Ability to search a location by name
+Ability to see characters related to a location
+Page to display Episodes in a grid of cards 
+Ability to search a Episode by name
+Ability to see characters in an episode
+ 
