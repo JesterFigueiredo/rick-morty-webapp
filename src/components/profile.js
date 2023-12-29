@@ -15,14 +15,11 @@ export default function Profile({character,buttonName}){
         getCharacterData(character).then((data)=>{
             setLocationAndOrigin(data.locationAndOrigin)
             setEpisodesAppearedIn(data.episodesAppearedIn)
+            setLoading(true)
         }).catch((err)=>{
             console.log(err);
         })
     },[])
-
-    useEffect(()=>{
-       setLoading(true)
-    },[locationAndOrigin])
 
 
     if(!loading){
@@ -87,6 +84,7 @@ export default function Profile({character,buttonName}){
                   <p><b>Status:</b> {character.status}</p>
                 <br />
                 <h3>Origin</h3>
+                {console.log(locationAndOrigin.origin?.name)}
                   <p><b>Name:</b> {locationAndOrigin?.origin?.name ? locationAndOrigin['origin']['name'] : character.location?.name || "unknown"}</p>
                   <p><b>dimension:</b> {locationAndOrigin?.['origin']?.['dimension'] ? locationAndOrigin['origin']['dimension'] :"Unknown"}</p>
                   <p><b>Number of Known residents:</b> {locationAndOrigin?.['origin']?.['residents'] ? locationAndOrigin['origin']['residents'] :"Unknown"}</p>
