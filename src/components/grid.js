@@ -2,7 +2,7 @@ import React from 'react';
 import CardComponent from './card';
 import './componentStyles.css'
 
-
+//responsibel for the structure of the grid and reponsiveness
 function Grid({charactersData}) {
 
   if(charactersData.length){

@@ -3,6 +3,7 @@ import Profile from './profile';
 
 function CardComponent({character}) {
 
+  //renders an instance of a card for every character data that is passed
   return (
     <>
     <Card style={{ width: '18rem', border:'solid', overflow:'hidden'}}>
@@ -15,7 +16,7 @@ function CardComponent({character}) {
     <Profile character={character}/>
     </>
   );
-  
+
 }
 
 export default CardComponent;

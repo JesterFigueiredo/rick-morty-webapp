@@ -4,23 +4,29 @@ import './componentStyles.css';
 import getCharacterData from './utils/getCharacterData';
 
 
-
+//Profile componenet is a modal that when called shows detailed information about a character in a popup modal
+//this component is currently being used in cards and search box
 export default function Profile({character,buttonName}){
 
     const [locationAndOrigin, setLocationAndOrigin] = useState({});
     const [episodesAppearedIn, setEpisodesAppearedIn] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    //This runs on the initial render to gather all the necessary data which requires a different api call
+    //data such as location, origin, episode in which the character appears
+    //this happens in the background and till then the user is shown a loading view
     useEffect(()=>{
         getCharacterData(character).then((data)=>{
             setLocationAndOrigin(data.locationAndOrigin)
             setEpisodesAppearedIn(data.episodesAppearedIn)
-            setLoading(true)
         }).catch((err)=>{
             console.log(err);
         })
     },[])
 
+    useEffect(()=>{
+      setLoading(true)
+    },[locationAndOrigin])
 
     if(!loading){
         return(

@@ -1,7 +1,8 @@
-import axios from "axios";
 
+//data for the filters are extracted via filters function, by passing the data of evrey character to the function
+//it gathers all the necessary into such as location, statuses etc.
+// it then filters out the duplicate data, keeping the data set unique
 export default function filters(charactersData){
-
 
     const locations = getLocations(charactersData);
     const statuses = getStatuses(charactersData);

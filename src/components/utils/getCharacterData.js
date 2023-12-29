@@ -1,6 +1,6 @@
 import axios from "axios";
 
-
+//gets all the information regarding origin,location and names of episodes the character appeared in
 export default async function getCharacterData(character){
     try{
 

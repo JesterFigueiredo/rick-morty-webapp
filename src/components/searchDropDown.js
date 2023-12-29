@@ -5,16 +5,11 @@ import filters from './utils/filters';
 import './componentStyles.css'
 
 
-
+//SearchDropDown component renders a dropDown searchable list
 export default function SearchDropDown({charactersData,setFilterOptions}){
-
+    
+    //filters function helps to process and return all the nessecary unique data that is needed for each filter
     const {locations,statuses,episodes,genders,species,types} = filters(charactersData);
-
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-      ]
     
     const [selectedOption, setSelectedOption] = useState({
         'status':'', 
@@ -52,7 +47,6 @@ export default function SearchDropDown({charactersData,setFilterOptions}){
             <label>type</label>
             <Select onChange={handleSelectChange} value={selectedOption.value} options={types}/>
             <Button className='button' onClick={()=>{setFilterOptions(selectedOption)}} variant="primary">Filter</Button>
-
         </div>
     )    
 }

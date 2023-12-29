@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import Profile from './profile';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
+
 export default function SearchBox({charactersArray}) {
 
   const [characterData,setCharacterData] = useState({})

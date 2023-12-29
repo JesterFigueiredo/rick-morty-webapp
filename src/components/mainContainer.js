@@ -5,11 +5,18 @@ import SearchBox from "./searchBox";
 import SearchDropDown from "./searchDropDown";
 import './componentStyles.css'
 
-
+// The MainContainer component holds the grid of cards and the filters and search bar to perform opertions  on the grid data
+// It performs all the network api calls to populate the grid, filters and search components with required data
+// It is also reponsible to update the grid data whenever filters are applied
 export default function MainContainer(){
 
+    
     const [loading,setLoading] = useState(false);
     const [charactersArray, setCharactersArray] = useState([]);
+    //initialArrayCopy state is a copy of charactersArray state
+    //charactersArray state changes over time to based on filters applied and that's where initialArrayCopy comes in
+    // it helps to set the state to the initial mode
+    // initialArrayCopy is also passed to search and filter componenet to extract required data for those components
     const [initialArrayCopy,setInitialArrayCopy] = useState([]);
     const [filterOptions, setFilterOptions] = useState(false);
 
@@ -22,6 +29,7 @@ export default function MainContainer(){
           }
     }
 
+    //runs on the initial render of the webapp to populate the grid
     useEffect(()=>{
         const reqTimes = 42;
         const urls = [];
@@ -31,6 +39,8 @@ export default function MainContainer(){
             urls.push(`https://rickandmortyapi.com/api/character/?page=${i}`)
         }
 
+        //since api is paginated, all required urls are built and and fetched one after the other, resulting in a array of promises
+        //this array is resolved with promise all and the characters' data is stored in the states
         const requests = urls.map((url)=>makeRequests(url))
         Promise.all(requests).then((data)=>{
             let tempCharactersArray = [];
@@ -49,8 +59,10 @@ export default function MainContainer(){
          
     },[])
 
+    //this use effect is only triggered when filterOptions state changes
+    //It looks after changing grid data based on the filters applied
     useEffect(()=>{
-        
+        //when content is only to be filtered based on episode number
         if(filterOptions.episode && filterOptions.location==='' 
         && filterOptions.status==='' && filterOptions.gender==='' 
         && filterOptions.species==='' && filterOptions.type==='')
@@ -75,7 +87,7 @@ export default function MainContainer(){
         }
 
 
-
+        //when content is only to be filtered based on location name
         else if(filterOptions.location && filterOptions.episode==='' 
                 && filterOptions.status==='' && filterOptions.gender==='' 
                 && filterOptions.species==='' && filterOptions.type==='')
@@ -92,7 +104,7 @@ export default function MainContainer(){
             }
 
 
-
+        //when content is to be filtered with rest of the parameters, this might include episode number and location name as well
          else if(filterOptions)
         {
             setLoading(false)
@@ -131,7 +143,7 @@ export default function MainContainer(){
 
                     tempCharactersArray = filteredArray;
                 }
-                
+
 
                 if(filterOptions.location)
                 {
@@ -154,7 +166,7 @@ export default function MainContainer(){
                 setCharactersArray([])
             })
         }
-         
+      //set state function for filterOptions is passed to the SearchDropDown Component   
     },[filterOptions])
 
 
