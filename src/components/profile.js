@@ -23,7 +23,7 @@ export default function Profile({character,buttonName}){
     useEffect(()=>{
        setLoading(true)
     },[locationAndOrigin])
-    console.log(episodesAppearedIn)
+
 
     if(!loading){
         return(

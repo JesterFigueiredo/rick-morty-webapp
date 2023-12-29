@@ -4,11 +4,8 @@ import axios from "axios";
 export default async function getCharacterData(character){
     try{
 
-        const originUrl = character.origin.url
-        const locationUrl = character.location.url
-
-        // console.log(character.origin.url,"here");
-        // console.log(character.location.url,"here");
+        const originUrl = character.origin.url || null
+        const locationUrl = character.location.url || null
 
         let origin = originUrl ? (await axios.get(originUrl)).data : null;
         let location = locationUrl ? (await axios.get(locationUrl)).data : null;
@@ -23,24 +20,24 @@ export default async function getCharacterData(character){
 
         const locationAndOrigin = {
             origin:{
-                name:origin.name,
-                dimension:origin.dimension,
-                residents:origin.residents.length,
-                type:origin.type
+                name:origin ? origin.name : "unknown",
+                dimension:origin ? origin.dimension : "unknown",
+                residents:origin ? origin.residents.length: "unknown",
+                type:origin ? origin.type : "unknown"
             },
 
-            location:{
-                name:location.name,
-                dimension:location.dimension,
-                residents:location.residents.length,
-                type:location.type
+            location: {
+                name: location && location.name ? location.name : "unknown",
+                dimension: location && location.dimension ? location.dimension : "unknown",
+                residents: location && location.residents ? location.residents.length : "unknown",
+                type: location && location.type ? location.type : "unknown"
             }
         }
 
         return {locationAndOrigin,episodesAppearedIn};
 
     }catch(err){
-        console.log(err)
+        console.log(err,"error here in getcharacterData")
     }
 }
 

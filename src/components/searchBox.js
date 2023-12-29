@@ -12,23 +12,6 @@ export default function SearchBox({charactersArray}) {
     items.push({id:i,name:charactersArray[i].name,characterData:charactersArray[i]});
   }
 
-
-  const handleOnSearch = (string, results) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    console.log(string, results)
-  }
-
-  const handleOnHover = (result) => {
-    // the item hovered
-    console.log(result)
-  }
-
-
-  const handleOnFocus = () => {
-    console.log('Focused')
-  }
-
   const formatResult = (item) => {
     return (
       <>
@@ -45,10 +28,7 @@ export default function SearchBox({charactersArray}) {
         <div style={{ width: 400 }}>
           <ReactSearchAutocomplete
               items={items}
-              onSearch={handleOnSearch}
-              onHover={handleOnHover}
               onSelect={(data)=>{setCharacterData(data['characterData']);}}
-              onFocus={handleOnFocus}
               autoFocus
               formatResult={formatResult}
           />
