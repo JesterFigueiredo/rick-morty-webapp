@@ -4,12 +4,22 @@ import axios from "axios";
 export default async function getCharacterData(character){
     try{
 
-        let origin,location;
         const originUrl = character.origin.url
         const locationUrl = character.location.url
 
-        originUrl ?   origin = (await axios.get(originUrl)).data : origin=null;
-        locationUrl ? location = (await axios.get(locationUrl)).data : location=null;
+        // console.log(character.origin.url,"here");
+        // console.log(character.location.url,"here");
+
+        let origin = originUrl ? (await axios.get(originUrl)).data : null;
+        let location = locationUrl ? (await axios.get(locationUrl)).data : null;
+
+        let url = "https://rickandmortyapi.com/api/episode/";
+        for(let i of character.episode){
+            const regex = /\/episode\/(\d+)$/;
+            const match = i.match(regex)[1];
+            url = url+match+','
+        }
+        let episodesAppearedIn = (await axios.get(url)).data;
 
         const locationAndOrigin = {
             origin:{
@@ -27,9 +37,10 @@ export default async function getCharacterData(character){
             }
         }
 
-        return locationAndOrigin;
+        return {locationAndOrigin,episodesAppearedIn};
 
     }catch(err){
         console.log(err)
     }
 }
+

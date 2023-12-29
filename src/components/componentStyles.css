@@ -17,6 +17,11 @@
   overflow-y: auto;
 
 }
+
+.button{
+  padding: 10px;
+  border-radius: 10px;
+}
 .modal > .header {
   width: 100%;
   border-bottom: 1px solid gray;

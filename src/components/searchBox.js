@@ -1,39 +1,17 @@
-import React from 'react'
-
+import React,{ useState } from 'react'
+import Profile from './profile';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 export default function SearchBox({charactersArray}) {
 
+  const [characterData,setCharacterData] = useState({})
+  
   const items = [];
 
   for(let i =0; i<charactersArray.length;i++){
-    items.push({id:i,name:charactersArray[i].name});
+    items.push({id:i,name:charactersArray[i].name,characterData:charactersArray[i]});
   }
 
-  // console.log(items2);
-  
-  // const items = [
-  //   {
-  //     id: 0,
-  //     name: 'Cobol'
-  //   },
-  //   {
-  //     id: 1,
-  //     name: 'JavaScript'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Basic'
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'PHP'
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'Java'
-  //   }
-  // ]
 
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
@@ -46,10 +24,6 @@ export default function SearchBox({charactersArray}) {
     console.log(result)
   }
 
-  const handleOnSelect = (item) => {
-    // the item selected
-    console.log(item)
-  }
 
   const handleOnFocus = () => {
     console.log('Focused')
@@ -63,18 +37,24 @@ export default function SearchBox({charactersArray}) {
     )
   }
 
+
+
   return (
     <div className="App">
       <header className="App-header">
         <div style={{ width: 400 }}>
           <ReactSearchAutocomplete
-            items={items}
-            onSearch={handleOnSearch}
-            onHover={handleOnHover}
-            onSelect={handleOnSelect}
-            onFocus={handleOnFocus}
-            autoFocus
-            formatResult={formatResult}
+              items={items}
+              onSearch={handleOnSearch}
+              onHover={handleOnHover}
+              onSelect={(data)=>{setCharacterData(data['characterData']);}}
+              onFocus={handleOnFocus}
+              autoFocus
+              formatResult={formatResult}
+          />
+          <Profile 
+            character={characterData}
+            buttonName={"Search"}
           />
         </div>
       </header>
